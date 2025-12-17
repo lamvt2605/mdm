@@ -12,6 +12,10 @@
         .tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 600; }
         .tab-inactive { color: #6b7280; }
         .tab-inactive:hover { color: #374151; }
+        /* Custom scrollbar for tables if needed */
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -21,10 +25,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <i class="fa-solid fa-layer-group text-blue-600 text-2xl"></i>
-                <h1 class="text-xl font-bold text-gray-900">So Sánh MDM Dashboard</h1>
+                <h1 class="text-xl font-bold text-gray-900">So Sánh MDM Chuyên Sâu</h1>
             </div>
             <div class="text-sm text-gray-500 hidden sm:block">
-                Dữ liệu cập nhật: Mosyle, JumpCloud, Iru
+                Dữ liệu: Mosyle, JumpCloud, Iru
             </div>
         </div>
     </header>
@@ -33,144 +37,105 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Tabs Navigation -->
-        <div class="border-b border-gray-200 mb-6">
-            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+        <div class="border-b border-gray-200 mb-6 overflow-x-auto">
+            <nav class="-mb-px flex space-x-8 min-w-max" aria-label="Tabs">
                 <button onclick="switchTab('overview')" id="tab-overview" class="tab-active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                    <i class="fa-solid fa-table-columns mr-2"></i>Tổng Quan & Bảo Mật
+                    <i class="fa-solid fa-shield-halved mr-2"></i>Bảo Mật & Quyền Riêng Tư
+                </button>
+                <button onclick="switchTab('features')" id="tab-features" class="tab-inactive whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm">
+                    <i class="fa-solid fa-microchip mr-2"></i>Tính Năng & Công Nghệ
                 </button>
                 <button onclick="switchTab('pricing')" id="tab-pricing" class="tab-inactive whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm">
-                    <i class="fa-solid fa-tags mr-2"></i>Giá Cả & Chính Sách
+                    <i class="fa-solid fa-tags mr-2"></i>Chi Tiết Giá Cả
                 </button>
                 <button onclick="switchTab('recommendation')" id="tab-recommendation" class="tab-inactive whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm">
-                    <i class="fa-solid fa-lightbulb mr-2"></i>Lời Khuyên & Ví Von
+                    <i class="fa-solid fa-lightbulb mr-2"></i>Lời Khuyên
                 </button>
             </nav>
         </div>
 
-        <!-- TAB 1: OVERVIEW & SECURITY -->
+        <!-- TAB 1: SECURITY & PRIVACY (Expanded) -->
         <div id="content-overview" class="space-y-6 animate-fade-in">
-            <!-- Intro Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Mosyle -->
-                <div class="bg-white rounded-xl shadow-sm border border-indigo-100 p-6 relative overflow-hidden group hover:shadow-md transition">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
-                        <i class="fa-brands fa-apple text-6xl text-indigo-600"></i>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold mr-3">M</div>
-                        <h2 class="text-lg font-bold text-gray-900">Mosyle</h2>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4 h-10">Chuyên gia hệ sinh thái Apple với khả năng triển khai Zero-Touch.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded-full border border-indigo-200">Apple Only</span>
-                        <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded-full border border-green-200">Giá tốt nhất</span>
-                    </div>
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-indigo-500">
+                    <h3 class="font-bold text-gray-900">Mosyle</h3>
+                    <p class="text-sm text-gray-600">Đối tác bảo vệ dữ liệu, không khai thác. Kiểm soát nhân viên gắt gao.</p>
                 </div>
-
-                <!-- JumpCloud -->
-                <div class="bg-white rounded-xl shadow-sm border border-orange-100 p-6 relative overflow-hidden group hover:shadow-md transition">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
-                        <i class="fa-solid fa-id-card text-6xl text-orange-600"></i>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <div class="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold mr-3">J</div>
-                        <h2 class="text-lg font-bold text-gray-900">JumpCloud</h2>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4 h-10">Nền tảng mở (Open Directory) kết hợp quản lý thiết bị và danh tính.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200">Đa nền tảng</span>
-                        <span class="px-2 py-1 bg-orange-50 text-orange-700 text-xs rounded-full border border-orange-200">Identity Focus</span>
-                    </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
+                    <h3 class="font-bold text-gray-900">JumpCloud</h3>
+                    <p class="text-sm text-gray-600">Chuẩn quốc tế (ISO/SOC2). Minh bạch về việc chia sẻ dữ liệu Marketing.</p>
                 </div>
-
-                <!-- Iru -->
-                <div class="bg-white rounded-xl shadow-sm border border-purple-100 p-6 relative overflow-hidden group hover:shadow-md transition">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
-                        <i class="fa-solid fa-robot text-6xl text-purple-600"></i>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold mr-3">I</div>
-                        <h2 class="text-lg font-bold text-gray-900">Iru (Kandji)</h2>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4 h-10">Quản lý thống nhất được hỗ trợ bởi AI và tự động hóa tuân thủ.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200">Đa nền tảng</span>
-                        <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded-full border border-purple-200">AI Driven</span>
-                    </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-purple-500">
+                    <h3 class="font-bold text-gray-900">Iru (Kandji)</h3>
+                    <p class="text-sm text-gray-600">Tuân thủ khung pháp lý EU-US. Dùng dữ liệu để huấn luyện AI.</p>
                 </div>
             </div>
 
-            <!-- Comparison Table -->
+            <!-- Detailed Comparison Table -->
             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
-                <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
-                    <h3 class="font-semibold text-gray-800">So Sánh Chi Tiết: Bảo Mật & Hệ Sinh Thái</h3>
+                <div class="px-6 py-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
+                    <h3 class="font-semibold text-gray-800">So Sánh Chi Tiết: Chính Sách & An Ninh</h3>
                 </div>
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto custom-scrollbar">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tiêu chí</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider bg-indigo-50/50">Mosyle</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-orange-700 uppercase tracking-wider bg-orange-50/50">JumpCloud</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-purple-700 uppercase tracking-wider bg-purple-50/50">Iru</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase w-1/4">Tiêu chí</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-indigo-700 uppercase w-1/4">Mosyle</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-orange-700 uppercase w-1/4">JumpCloud</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-purple-700 uppercase w-1/4">Iru (Kandji)</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-sm">
                             <tr>
-                                <td class="px-6 py-4 font-medium text-gray-900">Hệ sinh thái hỗ trợ</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Triết lý Quyền riêng tư</td>
                                 <td class="px-6 py-4 text-gray-600">
-                                    <i class="fa-brands fa-apple mr-1"></i> Apple Only<br>
-                                    <span class="text-xs text-gray-500">(macOS, iOS, iPadOS, tvOS...)</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mb-2">Tuyệt đối</span><br>
+                                    Cam kết <strong>không bao giờ bán</strong> thông tin. Định vị là đối tác bảo vệ, không khai thác.
                                 </td>
                                 <td class="px-6 py-4 text-gray-600">
-                                    <i class="fa-solid fa-layer-group mr-1"></i> Đa nền tảng<br>
-                                    <span class="text-xs text-gray-500">(Win, Mac, Android, Linux)</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mb-2">Minh bạch</span><br>
+                                    Có chia sẻ với "đối tác tiếp thị". Thu thập IP/web để phân tích & cá nhân hóa quảng cáo.
                                 </td>
                                 <td class="px-6 py-4 text-gray-600">
-                                    <i class="fa-solid fa-layer-group mr-1"></i> Đa nền tảng<br>
-                                    <span class="text-xs text-gray-500">(Apple, Windows, Android)</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-2">Hỗ trợ AI</span><br>
+                                    Thu thập dữ liệu thương mại & sử dụng internet. Dùng dữ liệu để <strong>train Generative AI</strong>.
                                 </td>
                             </tr>
                             <tr>
-                                <td class="px-6 py-4 font-medium text-gray-900">Chứng chỉ Bảo mật</td>
-                                <td class="px-6 py-4 text-gray-600">SOC 2 Type II, GDPR</td>
-                                <td class="px-6 py-4 text-gray-600">SOC 2 Type 2, ISO 27001</td>
-                                <td class="px-6 py-4 text-gray-600">Data Privacy Framework (EU-US)</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-gray-900">Quyền riêng tư</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Kiểm soát Nội bộ (Staff Controls)</td>
                                 <td class="px-6 py-4 text-gray-600">
                                     <ul class="list-disc pl-4 space-y-1">
-                                        <li>Tách biệt dữ liệu mã hóa (BYOD)</li>
-                                        <li>Không bán dữ liệu khách hàng</li>
+                                        <li>Truy cập cần khách hàng phê duyệt.</li>
+                                        <li>Chỉ dùng thiết bị tin cậy (Trusted Machines).</li>
+                                        <li>Kiểm tra lý lịch (Background checks) gắt gao.</li>
                                     </ul>
                                 </td>
                                 <td class="px-6 py-4 text-gray-600">
                                     <ul class="list-disc pl-4 space-y-1">
-                                        <li>Tuân thủ GDPR & CCPA</li>
-                                        <li>Quyền người dùng (xóa/truy cập)</li>
+                                        <li>Quét lỗ hổng liên tục.</li>
+                                        <li>Penetration tests hàng năm.</li>
+                                        <li>Chương trình báo lỗi (Vulnerability Disclosure).</li>
                                     </ul>
                                 </td>
                                 <td class="px-6 py-4 text-gray-600">
                                     <ul class="list-disc pl-4 space-y-1">
-                                        <li>Quyền được biết & không phân biệt đối xử</li>
-                                        <li>Hợp đồng tiêu chuẩn (SCCs)</li>
+                                        <li>Tuân thủ khung bảo mật dữ liệu EU-U.S.</li>
+                                        <li>Không hỗ trợ tín hiệu "Do Not Track".</li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="px-6 py-4 font-medium text-gray-900">Tính năng Nổi bật</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Xử lý Dữ liệu BYOD (Thiết bị cá nhân)</td>
                                 <td class="px-6 py-4 text-gray-600">
-                                    <span class="block mb-1 text-indigo-600 font-medium">Scripting AI</span>
-                                    <span class="block text-xs">Zero-Touch Deployment, Mosyle Auth 2, Tích hợp Antivirus</span>
+                                    <strong>Cryptographic Data Separation:</strong><br>Tách biệt dữ liệu bằng mã hóa. Công ty không thể chạm vào dữ liệu cá nhân.
                                 </td>
                                 <td class="px-6 py-4 text-gray-600">
-                                    <span class="block mb-1 text-orange-600 font-medium">Quản lý Danh tính (IAM)</span>
-                                    <span class="block text-xs">JumpCloud Go (Passwordless), System Insights</span>
+                                    Tuân thủ GDPR/CCPA. Cho phép người dùng yêu cầu xóa/truy cập dữ liệu ("Right to be forgotten").
                                 </td>
                                 <td class="px-6 py-4 text-gray-600">
-                                    <span class="block mb-1 text-purple-600 font-medium">Iru AI & Tuân thủ</span>
-                                    <span class="block text-xs">Tự động hóa Audit, Di chuyển tự động</span>
+                                    Cam kết giải quyết khiếu nại theo nguyên tắc khung bảo mật dữ liệu quốc tế.
                                 </td>
                             </tr>
                         </tbody>
@@ -179,105 +144,191 @@
             </div>
         </div>
 
-        <!-- TAB 2: PRICING -->
+        <!-- TAB 2: FEATURES & USAGE (New & Detailed) -->
+        <div id="content-features" class="hidden space-y-8 animate-fade-in">
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-900">Chi Tiết Tính Năng & Công Nghệ</h2>
+                <p class="text-gray-500">So sánh các công cụ cụ thể cho quản trị viên và người dùng cuối</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Mosyle Features -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col h-full">
+                    <div class="p-5 bg-indigo-50 border-b border-indigo-100 rounded-t-xl">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-brands fa-apple text-2xl text-indigo-600"></i>
+                            <h3 class="font-bold text-lg text-indigo-900">Mosyle (Apple Deep Dive)</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-magic text-indigo-500 mr-2"></i>Mosyle Embark</h4>
+                            <p class="text-sm text-gray-600">Giao diện thiết lập máy Mac trực quan, hiển thị thanh tiến trình cài đặt app cho user, thay vì màn hình đen nhàm chán.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-key text-indigo-500 mr-2"></i>Mosyle Auth 2</h4>
+                            <p class="text-sm text-gray-600">Đồng bộ mật khẩu đăng nhập Mac với <strong>Google/Microsoft/Okta</strong>. Hỗ trợ 2FA ngay tại màn hình Lock Screen.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-code text-indigo-500 mr-2"></i>AI Scripting</h4>
+                            <p class="text-sm text-gray-600">Dùng AI tạo sinh để viết script quản lý macOS bằng ngôn ngữ tự nhiên (Natural Language).</p>
+                        </div>
+                         <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-shield-virus text-indigo-500 mr-2"></i>Bảo mật tích hợp</h4>
+                            <p class="text-sm text-gray-600">Sẵn có Antivirus thế hệ mới, lọc Web (Encrypted DNS) và Admin On-Demand.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JumpCloud Features -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col h-full">
+                    <div class="p-5 bg-orange-50 border-b border-orange-100 rounded-t-xl">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-network-wired text-2xl text-orange-600"></i>
+                            <h3 class="font-bold text-lg text-orange-900">JumpCloud (Identity Core)</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-cloud text-orange-500 mr-2"></i>Cloud Directory</h4>
+                            <p class="text-sm text-gray-600">Thay thế Active Directory. Cung cấp <strong>LDAP & RADIUS trên mây</strong> để xác thực Wifi, VPN văn phòng không cần server vật lý.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-fingerprint text-orange-500 mr-2"></i>JumpCloud Go</h4>
+                            <p class="text-sm text-gray-600">Xác thực không mật khẩu (Passwordless) dựa trên thiết bị tin cậy và sinh trắc học.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-users-gear text-orange-500 mr-2"></i>HRIS Integration</h4>
+                            <p class="text-sm text-gray-600">Tự động hóa quy trình Onboarding/Offboarding nhân sự từ hệ thống HR.</p>
+                        </div>
+                         <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-chart-pie text-orange-500 mr-2"></i>System Insights</h4>
+                            <p class="text-sm text-gray-600">Báo cáo chi tiết phần cứng/phần mềm trên toàn bộ hạm đội thiết bị (Win/Mac/Linux).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Iru Features -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col h-full">
+                    <div class="p-5 bg-purple-50 border-b border-purple-100 rounded-t-xl">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-robot text-2xl text-purple-600"></i>
+                            <h3 class="font-bold text-lg text-purple-900">Iru (AI & Compliance)</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-file-contract text-purple-500 mr-2"></i>Compliance Automation</h4>
+                            <p class="text-sm text-gray-600">Tự động thu thập bằng chứng (evidence) và bản đồ kiểm soát cho audit. Luôn sẵn sàng cho kiểm toán (Audit-ready).</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-brain text-purple-500 mr-2"></i>Iru AI</h4>
+                            <p class="text-sm text-gray-600">Tích hợp sâu để trả lời câu hỏi mua sắm, đưa ra insight ngữ cảnh và hỗ trợ quản trị viên.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center"><i class="fa-solid fa-bandage text-purple-500 mr-2"></i>Zero-Touch Patching</h4>
+                            <p class="text-sm text-gray-600">Tự động vá lỗi cho hơn <strong>200 ứng dụng</strong> macOS phổ biến mà không cần can thiệp thủ công.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: PRICING (Detailed) -->
         <div id="content-pricing" class="hidden space-y-6 animate-fade-in">
             <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold text-gray-900">So Sánh Mô Hình Định Giá</h2>
-                <p class="text-gray-500 mt-2">Sự khác biệt lớn giữa tính theo Thiết bị và tính theo Người dùng</p>
+                <h2 class="text-2xl font-bold text-gray-900">Chi Tiết Các Gói Giá</h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Mosyle Pricing -->
-                <div class="bg-white rounded-2xl shadow-lg border-t-4 border-indigo-500 overflow-hidden transform hover:-translate-y-1 transition duration-300">
+                <div class="bg-white rounded-2xl shadow-lg border-t-4 border-indigo-500 overflow-hidden">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                            Mosyle
-                            <span class="ml-2 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Minh bạch nhất</span>
-                        </h3>
-                        <p class="text-sm text-gray-500 mt-1">Định giá theo Thiết bị</p>
+                        <h3 class="text-xl font-bold text-gray-900">Mosyle</h3>
+                        <p class="text-sm text-gray-500 mb-4">Tính theo Thiết bị (Per Device)</p>
                         
-                        <div class="mt-6 flex items-baseline">
-                            <span class="text-4xl font-extrabold tracking-tight text-gray-900">$1 - $3</span>
-                            <span class="ml-1 text-xl font-semibold text-gray-500">/thiết bị/tháng</span>
-                        </div>
-                        
-                        <div class="mt-6 space-y-4">
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm"><strong>Miễn phí</strong> cho tối đa 30 thiết bị.</span>
+                        <div class="space-y-4">
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">Business Premium</span>
+                                <span class="font-bold text-indigo-700">$1.00<span class="text-xs font-normal">/tháng</span></span>
                             </div>
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm">Miễn phí quản lý Apple TV & Watch.</span>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">Fuse (All-in-One) Mac</span>
+                                <span class="font-bold text-indigo-700">$3.00<span class="text-xs font-normal">/tháng</span></span>
                             </div>
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm">Gói giáo dục (K-12): $5.50 - $9.00/năm.</span>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">Fuse (All-in-One) iOS</span>
+                                <span class="font-bold text-indigo-700">$1.50<span class="text-xs font-normal">/tháng</span></span>
                             </div>
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm">MSP: Hoa hồng 100% năm đầu.</span>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">Giáo dục (K-12)</span>
+                                <span class="font-bold text-green-600">$5.50 - $9.00<span class="text-xs font-normal">/năm</span></span>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg mt-4">
+                                <p class="text-sm text-green-800 font-semibold"><i class="fa-solid fa-check mr-2"></i>Ưu đãi đặc biệt:</p>
+                                <ul class="text-xs text-green-700 mt-1 list-disc pl-4">
+                                    <li>Miễn phí quản lý Apple TV & Apple Watch.</li>
+                                    <li><strong>MSP:</strong> Hoa hồng 100% năm đầu (Miễn phí vốn).</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- JumpCloud Pricing -->
-                <div class="bg-white rounded-2xl shadow-lg border-t-4 border-orange-500 overflow-hidden transform hover:-translate-y-1 transition duration-300">
+                <div class="bg-white rounded-2xl shadow-lg border-t-4 border-orange-500 overflow-hidden">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                            JumpCloud
-                            <span class="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Linh hoạt</span>
-                        </h3>
-                        <p class="text-sm text-gray-500 mt-1">Định giá theo Người dùng (User)</p>
+                        <h3 class="text-xl font-bold text-gray-900">JumpCloud</h3>
+                        <p class="text-sm text-gray-500 mb-4">Tính theo User (Per User) - Trả năm</p>
                         
-                        <div class="mt-6 flex items-baseline">
-                            <span class="text-4xl font-extrabold tracking-tight text-gray-900">$9 - $15</span>
-                            <span class="ml-1 text-xl font-semibold text-gray-500">/người/tháng</span>
-                        </div>
-                        
-                        <div class="mt-6 space-y-4">
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm">Gói cơ bản từ $9, cao cấp (kèm SSO) từ $11-15.</span>
+                        <div class="space-y-4">
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">Device Only</span>
+                                <span class="font-bold text-orange-700">$9.00<span class="text-xs font-normal">/tháng</span></span>
                             </div>
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm"><strong>A La Carte (Mua lẻ):</strong> MDM ($5), Patch ($3), SSO ($3).</span>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">SSO Package</span>
+                                <span class="font-bold text-orange-700">$11.00<span class="text-xs font-normal">/tháng</span></span>
                             </div>
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm">Dùng thử miễn phí 30 ngày full tính năng.</span>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">Core Directory</span>
+                                <span class="font-bold text-orange-700">$13.00<span class="text-xs font-normal">/tháng</span></span>
+                            </div>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-700">Platform (Full)</span>
+                                <span class="font-bold text-orange-700">$15.00<span class="text-xs font-normal">/tháng</span></span>
+                            </div>
+                            <div class="bg-orange-50 p-3 rounded-lg mt-4">
+                                <p class="text-sm text-orange-800 font-semibold"><i class="fa-solid fa-basket-shopping mr-2"></i>A La Carte (Mua lẻ):</p>
+                                <ul class="text-xs text-orange-700 mt-1 list-disc pl-4">
+                                    <li>MDM: $5 | Patch Mgmt: $3 | SSO: $3</li>
+                                    <li>Chỉ cần mua những gì bạn dùng.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Iru Pricing -->
-                <div class="bg-white rounded-2xl shadow-lg border-t-4 border-purple-500 overflow-hidden transform hover:-translate-y-1 transition duration-300">
+                <div class="bg-white rounded-2xl shadow-lg border-t-4 border-purple-500 overflow-hidden">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                            Iru (Kandji)
-                            <span class="ml-2 px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full">Doanh nghiệp</span>
-                        </h3>
-                        <p class="text-sm text-gray-500 mt-1">Báo giá theo yêu cầu (Quote)</p>
+                        <h3 class="text-xl font-bold text-gray-900">Iru (Kandji)</h3>
+                        <p class="text-sm text-gray-500 mb-4">Báo giá Doanh nghiệp (Custom)</p>
                         
-                        <div class="mt-6 flex items-baseline">
-                            <span class="text-3xl font-bold tracking-tight text-gray-900">Liên hệ</span>
+                        <div class="flex flex-col items-center justify-center h-40 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                            <i class="fa-solid fa-file-signature text-3xl text-gray-400 mb-2"></i>
+                            <span class="font-bold text-gray-700">Request a Quote</span>
+                            <span class="text-xs text-gray-500 mt-1">Dựa trên Module & Số lượng</span>
                         </div>
                         
-                        <div class="mt-6 space-y-4">
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-info-circle text-purple-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm">Giá dựa trên giải pháp và quy mô.</span>
+                        <div class="mt-4 space-y-2">
+                             <div class="flex items-start">
+                                <i class="fa-solid fa-handshake text-purple-500 mt-1 mr-3"></i>
+                                <span class="text-gray-600 text-sm">Hỗ trợ Migration & Onboarding sâu sát.</span>
                             </div>
                             <div class="flex items-start">
                                 <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
                                 <span class="text-gray-600 text-sm">Dùng thử miễn phí 14 ngày.</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
-                                <span class="text-gray-600 text-sm">Miễn phí dịch vụ Migration & Onboarding.</span>
                             </div>
                         </div>
                     </div>
@@ -285,48 +336,57 @@
             </div>
         </div>
 
-        <!-- TAB 3: RECOMMENDATION -->
+        <!-- TAB 4: RECOMMENDATION -->
         <div id="content-recommendation" class="hidden space-y-8 animate-fade-in">
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold text-blue-900 mb-2">Lời khuyên: Chọn MDM như chọn phương tiện di chuyển</h2>
-                <p class="text-blue-800">Tùy thuộc vào "địa hình" (hạ tầng CNTT) của doanh nghiệp bạn mà lựa chọn phương tiện phù hợp.</p>
+                <h2 class="text-xl font-bold text-blue-900 mb-2">Lời Khuyên Cuối Cùng</h2>
+                <p class="text-blue-800">Chọn công cụ đúng cho vấn đề đúng.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Mosyle Analogy -->
-                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition text-center">
-                    <div class="w-16 h-16 mx-auto bg-indigo-100 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-flag-checkered text-2xl text-indigo-600"></i>
+                <!-- Mosyle -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition">
+                    <div class="flex items-center mb-3 text-indigo-700">
+                        <i class="fa-brands fa-apple text-2xl mr-2"></i>
+                        <h3 class="font-bold text-lg">Hệ Sinh Thái Apple</h3>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Chiếc Xe Đua Chuyên Dụng</h3>
-                    <p class="text-sm text-gray-600 mb-4 italic">"Tinh chỉnh riêng cho đường đua Apple"</p>
-                    <p class="text-sm text-gray-600 border-t pt-4">
-                        Chọn <strong>Mosyle</strong> nếu công ty bạn 100% dùng Apple. Hiệu năng cao nhất, rẻ nhất, chuyên sâu nhất.
-                    </p>
+                    <p class="text-sm text-gray-600 mb-4">Chọn <strong>Mosyle</strong> nếu:</p>
+                    <ul class="text-sm space-y-2 text-gray-700 list-disc pl-4">
+                        <li>Bạn chỉ dùng Mac/iPhone/iPad.</li>
+                        <li>Bạn cần bảo mật riêng tư tuyệt đối cho nhân viên.</li>
+                        <li>Ngân sách hạn hẹp nhưng cần tính năng cao cấp.</li>
+                        <li>Muốn trải nghiệm setup "Zero-touch" mượt mà nhất.</li>
+                    </ul>
                 </div>
 
-                <!-- JumpCloud Analogy -->
-                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition text-center">
-                    <div class="w-16 h-16 mx-auto bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-train-subway text-2xl text-orange-600"></i>
+                <!-- JumpCloud -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition">
+                    <div class="flex items-center mb-3 text-orange-700">
+                        <i class="fa-solid fa-id-badge text-2xl mr-2"></i>
+                        <h3 class="font-bold text-lg">Đa Nền Tảng & Identity</h3>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Trạm Giao Thông Công Cộng</h3>
-                    <p class="text-sm text-gray-600 mb-4 italic">"Quản lý cả xe cộ và hộ chiếu (Identity)"</p>
-                    <p class="text-sm text-gray-600 border-t pt-4">
-                        Chọn <strong>JumpCloud</strong> nếu bạn có môi trường hỗn hợp (Win/Mac) và cần quản lý danh tính (SSO/LDAP) tập trung.
-                    </p>
+                    <p class="text-sm text-gray-600 mb-4">Chọn <strong>JumpCloud</strong> nếu:</p>
+                    <ul class="text-sm space-y-2 text-gray-700 list-disc pl-4">
+                        <li>Bạn có môi trường hỗn hợp (Win + Mac).</li>
+                        <li>Cần quản lý Wifi/VPN văn phòng (Cloud RADIUS).</li>
+                        <li>Muốn quản lý định danh (SSO) và thiết bị trong 1 nơi.</li>
+                        <li>Cần vá lỗi cho nhiều hệ điều hành khác nhau.</li>
+                    </ul>
                 </div>
 
-                <!-- Iru Analogy -->
-                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition text-center">
-                    <div class="w-16 h-16 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-traffic-light text-2xl text-purple-600"></i>
+                <!-- Iru -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition">
+                    <div class="flex items-center mb-3 text-purple-700">
+                        <i class="fa-solid fa-file-shield text-2xl mr-2"></i>
+                        <h3 class="font-bold text-lg">Compliance & Audit</h3>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Hệ Thống Giao Thông AI</h3>
-                    <p class="text-sm text-gray-600 mb-4 italic">"Tự động điều tiết và đảm bảo tuân thủ luật lệ"</p>
-                    <p class="text-sm text-gray-600 border-t pt-4">
-                        Chọn <strong>Iru</strong> nếu ưu tiên hàng đầu là tự động hóa tuân thủ (Compliance) và hỗ trợ AI cho đa nền tảng.
-                    </p>
+                    <p class="text-sm text-gray-600 mb-4">Chọn <strong>Iru</strong> nếu:</p>
+                    <ul class="text-sm space-y-2 text-gray-700 list-disc pl-4">
+                        <li>Công ty đang chuẩn bị Audit (SOC2, ISO).</li>
+                        <li>Cần tự động hóa quy trình tuân thủ (Compliance).</li>
+                        <li>Cần vá lỗi tự động cho hệ thống ứng dụng macOS lớn.</li>
+                        <li>Sẵn sàng trả chi phí cao hơn cho tự động hóa.</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -337,15 +397,18 @@
         function switchTab(tabName) {
             // Hide all contents
             document.getElementById('content-overview').classList.add('hidden');
+            document.getElementById('content-features').classList.add('hidden');
             document.getElementById('content-pricing').classList.add('hidden');
             document.getElementById('content-recommendation').classList.add('hidden');
 
             // Reset tab styles
-            const tabs = ['overview', 'pricing', 'recommendation'];
+            const tabs = ['overview', 'features', 'pricing', 'recommendation'];
             tabs.forEach(t => {
                 const btn = document.getElementById(`tab-${t}`);
-                btn.classList.remove('tab-active', 'border-b-2', 'border-blue-600', 'text-blue-600');
-                btn.classList.add('tab-inactive', 'border-transparent');
+                if(btn) {
+                    btn.classList.remove('tab-active', 'border-b-2', 'border-blue-600', 'text-blue-600');
+                    btn.classList.add('tab-inactive', 'border-transparent');
+                }
             });
 
             // Show selected content
@@ -353,8 +416,10 @@
 
             // Highlight selected tab
             const activeBtn = document.getElementById(`tab-${tabName}`);
-            activeBtn.classList.remove('tab-inactive', 'border-transparent');
-            activeBtn.classList.add('tab-active', 'border-blue-600', 'text-blue-600');
+            if(activeBtn) {
+                activeBtn.classList.remove('tab-inactive', 'border-transparent');
+                activeBtn.classList.add('tab-active', 'border-blue-600', 'text-blue-600');
+            }
         }
     </script>
 </body>
